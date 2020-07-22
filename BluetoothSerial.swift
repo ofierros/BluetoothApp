@@ -160,29 +160,7 @@ final class BluetoothSerial: NSObject, CBCentralManagerDelegate, CBPeripheralDel
         connectedPeripheral!.readRSSI()
     }
     
-    /// Send a string to the device
-    func sendMessageToDevice(_ message: String) {
-        guard isReady else { return }
-        
-        if let data = message.data(using: String.Encoding.utf8) {
-            connectedPeripheral!.writeValue(data, for: writeCharacteristic!, type: writeType)
-        }
-    }
-    
-    /// Send an array of bytes to the device
-    func sendBytesToDevice(_ bytes: [UInt8]) {
-        guard isReady else { return }
-        
-        let data = Data(bytes: UnsafePointer<UInt8>(bytes), count: bytes.count)
-        connectedPeripheral!.writeValue(data, for: writeCharacteristic!, type: writeType)
-    }
-    
-    /// Send data to the device
-    func sendDataToDevice(_ data: Data) {
-        guard isReady else { return }
-        
-        connectedPeripheral!.writeValue(data, for: writeCharacteristic!, type: writeType)
-    }
+
     
     
     // MARK: CBCentralManagerDelegate functions
